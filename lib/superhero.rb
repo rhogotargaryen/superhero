@@ -1,5 +1,7 @@
-require "superhero/version"
+require 'bundler/setup'
 
-module Superhero
-  # Your code goes here...
+class Super
+    def hello
+        puts "test hello"
+    end
 end

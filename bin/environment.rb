@@ -1,0 +1,5 @@
+require "bundler/setup"
+require "require_all"
+require "pry"
+require "nokogiri"
+require_rel "../lib"
