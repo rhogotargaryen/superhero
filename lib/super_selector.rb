@@ -38,11 +38,11 @@ class Selector
     def self.dc_list
         @@dc_list
     end
-
-    def path
+    
+    def self.path
         @@path
     end
-        
+    
 
     def studio_check
         i = 0
