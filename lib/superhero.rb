@@ -5,9 +5,11 @@ class Super
     attr_accessor :name
     attr_reader :studio
     
-    def initialize(name)
-       a = Selector.new(name.downcase!)
+    def initialize(sel_obj)
+       a = Selector.new(sel_obj.name.downcase!)
        @studio = a.studio_check
        @name = a.name
     end
+    
+    
 end

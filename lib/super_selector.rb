@@ -19,6 +19,10 @@ class Selector
         @@dc_list = []
         doc = Nokogiri::HTML(open("#{@@path}/List_of_DC_Characters")).css("#mw-content-text li a")
         doc.each {|x| @@dc_list << x.text}
+        no_info = doc.map {|x| x.text if x.attr("href").include?("?") == true}
+        no_info.delete(nil)
+        binding.pry
+        @@dc_list.reject {|x| no_info.include? x}
         return @@dc_list
     end
     
