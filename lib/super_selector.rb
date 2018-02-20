@@ -12,6 +12,9 @@ class Selector
         @@m_list = []
         doc = Nokogiri::HTML(open("#{@@path}/List_of_Marvel_Characters")).css("#mw-content-text li a")
         doc.each {|x| @@m_list << x.text}
+        no_info = doc.map {|x| x.text if x.attr("href").include?("?") == true}
+        no_info.delete(nil)
+        @@m_list.reject! {|x| no_info.include? x}
         return @@m_list
     end
     
@@ -21,12 +24,10 @@ class Selector
         doc.each {|x| @@dc_list << x.text}
         no_info = doc.map {|x| x.text if x.attr("href").include?("?") == true}
         no_info.delete(nil)
-        binding.pry
-        @@dc_list.reject {|x| no_info.include? x}
+        @@dc_list.reject! {|x| no_info.include? x}
         return @@dc_list
     end
     
-
     @@m_list = Selector.m_lister
     @@dc_list = Selector.dc_lister
 
