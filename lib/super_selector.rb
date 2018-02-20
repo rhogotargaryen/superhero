@@ -63,6 +63,7 @@ class Selector
     def get_info
         self.studio_check
         s_param = @name.gsub(" ", "_")
+        doc = Nokogiri::HTML(open("#{@@path}/#{s_param}")).css("#mw-content-text")
         binding.pry
     end
 end
