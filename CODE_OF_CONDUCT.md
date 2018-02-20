@@ -72,3 +72,11 @@ available at [http://contributor-covenant.org/version/1/4][version]
 
 [homepage]: http://contributor-covenant.org
 [version]: http://contributor-covenant.org/version/1/4/
+
+
+
+Whats is convenient is that they are labelled using the same css/html structures.
+lets investigate again.
+
+of course it look like this will be more difficult because both stuios hero info are composed differently. as long as they are each uniform we are still in business.
+
