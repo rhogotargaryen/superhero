@@ -31,9 +31,9 @@ class Selector
     end
     def studio_check
         nu_name = @name.titleize
-        if m_list.include?(nu_name)
+        if @@m_list.include?(nu_name)
             puts "Marvel character"
-        elsif dc_list.include?(nu_name)
+        elsif @@dc_list.include?(nu_name)
             puts "DC character"
         end
     end
