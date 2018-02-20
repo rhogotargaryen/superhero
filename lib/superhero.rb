@@ -13,5 +13,4 @@ class Super
        @path = "#{Selector.path}/List_of_#{@studio}_Characters"
     end
     
-    
 end

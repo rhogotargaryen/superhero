@@ -2,10 +2,13 @@ require "bundler/setup"
 require_relative "../bin/environment"
 
 class Selector
-    attr_reader :name
+    attr_reader :name, :gen_info, :studio
     @@path = "http://superheroes.wikia.com/wiki"
     def initialize(name)
+        return @name = false if !@@m_list.include?(name) && !@@dc_list.include?(name)
         @name = name.downcase.titleize
+        @studio = self.studio_check
+        @gen_info = self.gen_info
     end
     
     def self.m_lister
@@ -42,7 +45,6 @@ class Selector
     def self.path
         @@path
     end
-    
 
     def studio_check
         i = 0
@@ -65,10 +67,11 @@ class Selector
         end
     end
     
-    def get_info
+    def gen_info
         self.studio_check
         s_param = @name.gsub(" ", "_")
-        doc = Nokogiri::HTML(open("#{@@path}/#{s_param}")).css("#mw-content-text")
+        doc = Nokogiri::HTML(open("#{@@path}/#{s_param}")).css("#mw-content-text p")
+        @gen_info = doc.text.delete("\n")
         binding.pry
     end
 end
