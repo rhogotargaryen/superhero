@@ -29,6 +29,13 @@ class Selector
     def self.dc_list
         @@dc_list
     end
-    
+    def studio_check
+        nu_name = @name.titleize
+        if m_list.include?(nu_name)
+            puts "Marvel character"
+        elsif dc_list.include?(nu_name)
+            puts "DC character"
+        end
+    end
 end
 
