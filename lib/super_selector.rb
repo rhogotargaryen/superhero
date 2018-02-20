@@ -1,23 +1,23 @@
 require "bundler/setup"
-
 require_relative "../bin/environment"
+
 class Selector
-    attr_accessor :name
-    
+    attr_reader :name
+    @@path = "http://superheroes.wikia.com/wiki"
     def initialize(name)
-        @name = name.titleize
+        @name = name.downcase.titleize
     end
     
     def self.m_lister
         @@m_list = []
-        doc = Nokogiri::HTML(open("http://superheroes.wikia.com/wiki/List_of_Marvel_Characters")).css("#mw-content-text li a")
+        doc = Nokogiri::HTML(open("#{@@path}/List_of_Marvel_Characters")).css("#mw-content-text li a")
         doc.each {|x| @@m_list << x.text}
         return @@m_list
     end
     
     def self.dc_lister
         @@dc_list = []
-        doc = Nokogiri::HTML(open("http://superheroes.wikia.com/wiki/List_of_DC_Characters")).css("#mw-content-text li a")
+        doc = Nokogiri::HTML(open("#{@@path}/List_of_DC_Characters")).css("#mw-content-text li a")
         doc.each {|x| @@dc_list << x.text}
         return @@dc_list
     end
@@ -33,7 +33,12 @@ class Selector
     def self.dc_list
         @@dc_list
     end
-    
+
+    def path
+        @@path
+    end
+        
+
     def studio_check
         i = 0
         while i < 2
@@ -53,6 +58,12 @@ class Selector
                 end
             end
         end
+    end
+    
+    def get_info
+        self.studio_check
+        s_param = @name.gsub(" ", "_")
+        binding.pry
     end
 end
 
