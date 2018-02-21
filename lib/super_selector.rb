@@ -1,7 +1,7 @@
 require "bundler/setup"
 require_relative "../bin/environment"
 
-class Selector
+class Super
     attr_reader :name, :gen_info, :studio
     @@path = "http://superheroes.wikia.com/wiki"
     def initialize(name)
@@ -28,11 +28,12 @@ class Selector
         no_info = doc.map {|x| x.text if x.attr("href").include?("?") == true}
         no_info.delete(nil)
         @@dc_list.reject! {|x| no_info.include? x}
+        @@dc_list.each {|x| x.gsub!(/ \(.+\)/, "")}
         return @@dc_list
     end
     
-    @@m_list = Selector.m_lister
-    @@dc_list = Selector.dc_lister
+    @@m_list = Super.m_lister
+    @@dc_list = Super.dc_lister
 
     def self.m_list
         @@m_list
@@ -40,10 +41,6 @@ class Selector
     
     def self.dc_list
         @@dc_list
-    end
-    
-    def self.path
-        @@path
     end
 
     def studio_check

@@ -1,4 +1,61 @@
 #!/usr/bin/env ruby
 
 require_relative "environment"
-puts "HELLO"
+
+
+class CLI
+    
+    def call
+        puts "Welcome to the Super_Scraper ruby gem!"
+        puts "hello"
+        self.input_selector
+    end
+    
+    def input_selector
+        puts "How would you like to input a Superhero? (\"enter a name\", \"by studio\", or \"random list\")"
+        choice = gets.strip.downcase
+        while !["enter a name", "by studio", "random list"].include?(choice)
+            puts "oops lets try that again. (\"enter a name\", \"by studio\", or \"random list\")"
+            choice = gets.strip.downcase
+        end
+        if choice == "enter a name"
+            self.input_enter
+        elsif choice == "by studio"
+            self.input_studio
+        elsif choice == "random list"
+            self.input_random
+        end
+    end
+    
+    def input_enter
+        puts "please enter the name of the Superhero:"
+        hero = gets.strip
+        a = Super.new(hero)
+        while a.name == false
+            puts "I'm sorry I am unable to find infoermation on that hero, let's try another:"
+            hero = gets.strip
+            a = Super.new(hero)
+        end
+        require 'pry'; binding.pry
+        puts a.gen_info
+    end
+    
+    def input_studio
+        puts "thank you for selecting, by studio.  Please chose either \"DC\" or \"Marvel\""
+        stud = gets.strip.downcase
+        while !["dc", "marvel"].include?(stud)
+            puts "oops lets try again. Please chose either \"DC\" or \"Marvel\""
+            stud = gets.strip.downcase
+        end
+        if stud == "dc"
+            a = Super::dc_list
+        elsif stud == "marvel"
+            a = Super::m_list
+        end
+        require 'pry'; binding.pry
+        a.each.with_index {|x| print "#{x}"}
+    end
+    
+end
+
+CLI.new.call
