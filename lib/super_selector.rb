@@ -5,10 +5,9 @@ class Selector
     attr_reader :name, :gen_info, :studio
     @@path = "http://superheroes.wikia.com/wiki"
     def initialize(name)
-        @name = name.downcase.titleize
-        @studio = self.studio_check
-        return @name = false if !@@m_list.include?(name) && !@@dc_list.include?(name)
-        @name = name.downcase.titleize
+        @name = name.downcase.titleize!
+        self.studio_check
+        return @name = false if @studio == nil
         @gen_info = self.gen_info
     end
     
@@ -52,10 +51,10 @@ class Selector
         while i < 2
             if @@m_list.include?(@name)
                 puts "Marvel character"
-                return "Marvel"
+                return @studio = "Marvel"
             elsif @@dc_list.include?(@name)
                 puts "DC character"
-                return "DC"
+                return @studio = "DC"
             else
                 if @name.include?("The ")
                     @name.gsub!("The ", "")
