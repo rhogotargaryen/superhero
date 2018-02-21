@@ -5,3 +5,4 @@ require "open-uri"
 require "titleize"
 require "nokogiri"
 require_rel "../lib"
+

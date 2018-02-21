@@ -5,9 +5,10 @@ class Selector
     attr_reader :name, :gen_info, :studio
     @@path = "http://superheroes.wikia.com/wiki"
     def initialize(name)
-        return @name = false if !@@m_list.include?(name) && !@@dc_list.include?(name)
         @name = name.downcase.titleize
         @studio = self.studio_check
+        return @name = false if !@@m_list.include?(name) && !@@dc_list.include?(name)
+        @name = name.downcase.titleize
         @gen_info = self.gen_info
     end
     
@@ -68,11 +69,9 @@ class Selector
     end
     
     def gen_info
-        self.studio_check
         s_param = @name.gsub(" ", "_")
         doc = Nokogiri::HTML(open("#{@@path}/#{s_param}")).css("#mw-content-text p")
         @gen_info = doc.text.delete("\n")
-        binding.pry
     end
 end
 
