@@ -36,7 +36,6 @@ class CLI
             hero = gets.strip
             a = Super.new(hero)
         end
-        require 'pry'; binding.pry
         puts a.gen_info
     end
     
@@ -53,7 +52,30 @@ class CLI
             a = Super::m_list
         end
         require 'pry'; binding.pry
-        a.each.with_index {|x| print "#{x}"}
+        display_studio(a)
+    end
+    
+    def display_studio(stud_array)
+        dis_array = stud_array.each_slice(10).to_a
+        i = 0
+        while i < dis_array.length
+            puts dis_array[i]
+            puts "displaying  [#{i + 1} // #{dis_array.length + 1}]  pages"
+            puts "please enter a heroes name, \"next\" for next page of heroes, or \"exit\" to exit the program and be offered a new search"
+            input = gets.strip.downcase
+            while ![ "next", "exit"].include?(input) && Super.new(input).name == false
+                puts "I'm sorry either your hero selection was invalid or I didnt understand your request"
+                puts "please enter a heroes name, \"next\" for next page of heroes, or \"exit\" to exit the the current seach and be offered a new search"
+                input = gets.strip.downcase
+            end
+            if input == "exit"
+                break
+            elsif Super.new(input).name != false
+                puts Super.new(input).gen_info
+                break
+            end
+            i += 1
+        end
     end
     
 end

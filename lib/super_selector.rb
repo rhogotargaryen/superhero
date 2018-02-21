@@ -47,10 +47,8 @@ class Super
         i = 0
         while i < 2
             if @@m_list.include?(@name)
-                puts "Marvel character"
                 return @studio = "Marvel"
             elsif @@dc_list.include?(@name)
-                puts "DC character"
                 return @studio = "DC"
             else
                 if @name.include?("The ")
