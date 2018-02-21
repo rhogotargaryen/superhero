@@ -7,12 +7,11 @@ class CLI
     
     def call
         puts "Welcome to the Super_Scraper ruby gem!"
-        puts "hello"
         self.input_selector
     end
     
     def input_selector
-        puts "How would you like to input a Superhero? (\"enter a name\", \"by studio\", or \"random list\")"
+        puts "How would you like to input a Superhero or Villain? (\"enter a name\", \"by studio\", or \"random list\")"
         choice = gets.strip.downcase
         while !["enter a name", "by studio", "random list"].include?(choice)
             puts "oops lets try that again. (\"enter a name\", \"by studio\", or \"random list\")"
@@ -51,7 +50,6 @@ class CLI
         elsif stud == "marvel"
             a = Super::m_list
         end
-        require 'pry'; binding.pry
         display_studio(a)
     end
     
@@ -78,6 +76,16 @@ class CLI
         end
     end
     
+    def input_random
+        a = Super::m_list
+        b = Super::dc_list
+        c = a.concat(b)
+        c.shuffle!
+        puts "thank you for chosing the random list input method, here are a list of heroes to chose from, simply enter the Hero's name:"
+        display_studio(a)
+    end
+        
+        
 end
 
 CLI.new.call
