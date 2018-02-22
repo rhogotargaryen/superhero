@@ -6,7 +6,7 @@ class Super
     @@path = "http://superheroes.wikia.com/wiki"
     def initialize(name)
         @name = name.downcase.titleize!
-        self.studio_check
+        @studio = self.studio_check
         return @name = false if @studio == nil
         @gen_info = self.gen_info
     end
@@ -32,7 +32,7 @@ class Super
         return @@dc_list
     end
     
-    @@m_list = Super.m_lister
+    @@m_list = Super.m_lister - ["U.S. Agent", "A-Bomb"]
     @@dc_list = Super.dc_lister
 
     def self.m_list
