@@ -73,24 +73,3 @@ available at [http://contributor-covenant.org/version/1/4][version]
 [homepage]: http://contributor-covenant.org
 [version]: http://contributor-covenant.org/version/1/4/
 
-
-
-Whats is convenient is that they are labelled using the same css/html structures.
-lets investigate again.
-
-of course it look like this will be more difficult because both stuios hero info are composed differently. as long as they are each uniform we are still in business.
-
-LOL looks like its pretty one off some of the inconsistencies and I may have the power to bend the site to my will.
-
-OK so it look like inside a paragrah in the div with id #mw-content-text has a first paragraph element with genereal information for all heroes 
-(DC and Marvel)
-
-and AT minimum it looks like every valid hero has this information so well will first make our program simply store and return this information within our
-Super objects under gen_info.  I would like to then add a funciton that checks if we can (in a valid way) add more information.  Im hoping to create
-sym.key//value pair.  The sym will be over encompassing as possible and associated with an array of commonly used headings that can be associated with
-that symbol key pairing.  IE :powers will be asoociated with an array, for example [ "Powers", "Abilities", "Specials", "Mutations", etc.. ] and a 
-conditional will check if the headings text is included in the associated.  I think that will be all for my recording at the moment.
-
-Im at the wework in long beach and theres a presentation on going, sorry for any distractions and thanks for watching!
-
-MARVEL :: get rid of patriot,radioactive man, payback, hercules, gladiator, death, dracula, assasin
