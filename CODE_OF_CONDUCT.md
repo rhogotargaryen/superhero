@@ -92,3 +92,5 @@ that symbol key pairing.  IE :powers will be asoociated with an array, for examp
 conditional will check if the headings text is included in the associated.  I think that will be all for my recording at the moment.
 
 Im at the wework in long beach and theres a presentation on going, sorry for any distractions and thanks for watching!
+
+MARVEL :: get rid of patriot,radioactive man, payback, hercules, gladiator, death, dracula, assasin

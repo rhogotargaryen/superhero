@@ -8,6 +8,16 @@ class CLI
     def call
         puts "Welcome to the Super_Scraper ruby gem!"
         self.input_selector
+        ans = ""
+        while ans != "y" && ans != "n"
+            puts "Would you like a new search? [y/n]"
+            ans = gets.strip.downcase
+            if ans == "y"
+                self.input_selector
+            elsif ans == "n"
+                self.salutations
+            end
+        end
     end
     
     def input_selector
@@ -84,8 +94,11 @@ class CLI
         puts "thank you for chosing the random list input method, here are a list of heroes to chose from, simply enter the Hero's name:"
         display_studio(a)
     end
-        
-        
+    
+    def salutations
+        puts "Thank you for visiting my app, please leave any comments on my github.  [details in README]"
+        puts "COME BACK SOON!"
+    end
 end
 
 CLI.new.call
