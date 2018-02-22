@@ -32,7 +32,7 @@ class Super
         return @@dc_list
     end
     
-    @@m_list = Super.m_lister - ["U.S. Agent", "A-Bomb"]
+    @@m_list = Super.m_lister - ["U.S. Agent", "A-Bomb", "Patriot", "Radioactive Man", "Payback", "Hercules", "Gladiator", "Death", "Assassin", "X-23"]
     @@dc_list = Super.dc_lister
 
     def self.m_list
