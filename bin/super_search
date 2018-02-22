@@ -6,25 +6,27 @@ require_relative "environment"
 class CLI
     
     def call
-        puts "Welcome to the Super_Scraper ruby gem!"
+        self.greeting
         self.input_selector
-        ans = ""
+        puts "Would you like a new search? [y/n]".yellow
+        ans = gets.strip.downcase
         while ans != "y" && ans != "n"
-            puts "Would you like a new search? [y/n]"
+            puts "Didn't catch that try \"y\" or \"n\"".yellow
             ans = gets.strip.downcase
-            if ans == "y"
-                self.input_selector
-            elsif ans == "n"
-                self.salutations
-            end
         end
+        while ans == "y" && ans != "n"
+            self.input_selector
+            puts "Would you like a new search? [y/n]".yellow
+            ans = gets.strip.downcase
+        end
+        self.salutations
     end
     
     def input_selector
-        puts "How would you like to input a Superhero or Villain? (\"enter a name\", \"by studio\", or \"random list\")"
+        puts "How would you like to input a Superhero or Villain? (\"enter a name\", \"by studio\", or \"random list\")".yellow
         choice = gets.strip.downcase
         while !["enter a name", "by studio", "random list"].include?(choice)
-            puts "oops lets try that again. (\"enter a name\", \"by studio\", or \"random list\")"
+            puts "oops lets try that again. (\"enter a name\", \"by studio\", or \"random list\")".yellow
             choice = gets.strip.downcase
         end
         if choice == "enter a name"
@@ -37,11 +39,11 @@ class CLI
     end
     
     def input_enter
-        puts "please enter the name of the Superhero:"
+        puts "please enter the name of the Superhero:".yellow
         hero = gets.strip
         a = Super.new(hero)
         while a.name == false
-            puts "I'm sorry I am unable to find infoermation on that hero, let's try another:"
+            puts "I'm sorry I am unable to find infoermation on that hero, let's try another: [enter hero name]".yellow
             hero = gets.strip
             a = Super.new(hero)
         end
@@ -49,10 +51,10 @@ class CLI
     end
     
     def input_studio
-        puts "thank you for selecting, by studio.  Please chose either \"DC\" or \"Marvel\""
+        puts "thank you for selecting, by studio.  Please chose either \"DC\" or \"Marvel\"".yellow
         stud = gets.strip.downcase
         while !["dc", "marvel"].include?(stud)
-            puts "oops lets try again. Please chose either \"DC\" or \"Marvel\""
+            puts "oops lets try again. Please chose either \"DC\" or \"Marvel\"".yellow
             stud = gets.strip.downcase
         end
         if stud == "dc"
@@ -68,12 +70,12 @@ class CLI
         i = 0
         while i < dis_array.length
             puts dis_array[i]
-            puts "displaying  [#{i + 1} // #{dis_array.length + 1}]  pages"
-            puts "please enter a heroes name, \"next\" for next page of heroes, or \"exit\" to exit the program and be offered a new search"
+            puts "displaying  [#{i + 1} // #{dis_array.length + 1}]  pages".light_blue
+            puts "please enter a heroes name, \"next\" for next page of heroes, or \"exit\" to exit the program and be offered a new search".yellow
             input = gets.strip.downcase
             while ![ "next", "exit"].include?(input) && Super.new(input).name == false
-                puts "I'm sorry either your hero selection was invalid or I didnt understand your request"
-                puts "please enter a heroes name, \"next\" for next page of heroes, or \"exit\" to exit the the current seach and be offered a new search"
+                puts "I'm sorry either your hero selection was invalid or I didnt understand your request".yellow
+                puts "please enter a heroes name, \"next\" for next page of heroes, or \"exit\" to exit the the current seach and be offered a new search".yellow
                 input = gets.strip.downcase
             end
             if input == "exit"
@@ -91,13 +93,27 @@ class CLI
         b = Super::dc_list
         c = a.concat(b)
         c.shuffle!
-        puts "thank you for chosing the random list input method, here are a list of heroes to chose from, simply enter the Hero's name:"
+        puts "thank you for chosing the random list input method, here are a list of heroes to chose from, simply enter the Hero's name:".yellow
         display_studio(a)
     end
     
     def salutations
-        puts "Thank you for visiting my app, please leave any comments on my github.  [details in README]"
-        puts "COME BACK SOON!"
+        puts "Thank you for visiting my app, please leave any comments on my github.  [details in README]".light_blue
+        puts "COME BACK SOON!".light_blue
+    end
+    
+    def greeting
+        puts '
+                
+         /\/|____ _   _______ ___________   _____ _____ _      _____ _____ _____ ___________ /\/|
+        |/\/  ___| | | | ___ \  ___| ___ \ /  ___|  ___| |    |  ___/  __ \_   _|  _  | ___ \/\/ 
+           \ `--.| | | | |_/ / |__ | |_/ / \ `--.| |__ | |    | |__ | /  \/ | | | | | | |_/ /    
+            `--. \ | | |  __/|  __||    /   `--. \  __|| |    |  __|| |     | | | | | |    /     
+           /\__/ / |_| | |   | |___| |\ \  /\__/ / |___| |____| |___| \__/\ | | \ \_/ / |\ \     
+           \____/ \___/\_|   \____/\_| \_| \____/\____/\_____/\____/ \____/ \_/  \___/\_| \_|    
+                                                                                                 
+                                                                                                 
+        '.yellow
     end
 end
 
