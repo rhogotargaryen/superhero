@@ -18,6 +18,10 @@ class CLI
             self.input_selector
             puts "Would you like a new search? [y/n]".yellow
             ans = gets.strip.downcase
+            while !["y", "n"].include?(ans)
+                puts "Didn't catch that try \"y\" or \"n\"".yellow
+                ans = gets.strip.downcase
+            end
         end
         self.salutations
     end
