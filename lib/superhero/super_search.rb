@@ -1,7 +1,3 @@
-#!/usr/bin/env ruby
-
-require_relative "environment"
-
 
 class CLI
     
@@ -120,5 +116,3 @@ class CLI
         '.yellow
     end
 end
-
-CLI.new.call

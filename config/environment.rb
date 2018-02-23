@@ -5,5 +5,5 @@ require "open-uri"
 require "titleize"
 require "nokogiri"
 require "colorize"
-require_rel "../lib"
+require_all "lib"
 

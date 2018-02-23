@@ -1,5 +1,5 @@
 require "bundler/setup"
-require_relative "../bin/environment"
+
 
 class Super
     attr_reader :name, :gen_info, :studio
