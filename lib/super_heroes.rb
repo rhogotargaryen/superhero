@@ -3,7 +3,8 @@ require "bundler/setup"
 
 class Super
     attr_reader :name, :gen_info, :studio
-    @@path = "http://superheroes.wikia.com/wiki"
+    PATH = "http://superheroes.wikia.com/wiki"
+    PARAMS = { marvel: "/List_of_Marvel_Characters", dc: "/List_of_DC_Characters"}
     def initialize(name)
         @name = name.downcase.titleize!
         @studio = self.studio_check
@@ -11,27 +12,24 @@ class Super
         @gen_info = self.gen_info
     end
     
-    def self.m_lister
-        @@m_list = []
-        doc = Nokogiri::HTML(open("#{@@path}/List_of_Marvel_Characters")).css("#mw-content-text li a")
-        doc.each {|x| @@m_list << x.text}
+    def self.lister(stud)
+        curr_list = []
+        doc = Nokogiri::HTML(open("#{PATH}#{PARAMS[stud]}")).css("#mw-content-text li a")
+        doc.each {|x| curr_list << x.text}
         no_info = doc.map {|x| x.text if x.attr("href").include?("?") == true}
         no_info.delete(nil)
-        @@m_list.reject! {|x| no_info.include? x}
-        return @@m_list
+        curr_list.reject! {|x| no_info.include? x}
+        return curr_list
     end
     
     def self.dc_lister
-        @@dc_list = []
-        doc = Nokogiri::HTML(open("#{@@path}/List_of_DC_Characters")).css("#mw-content-text li a")
-        doc.each {|x| @@dc_list << x.text}
-        no_info = doc.map {|x| x.text if x.attr("href").include?("?") == true}
-        no_info.delete(nil)
-        @@dc_list.reject! {|x| no_info.include? x}
-        @@dc_list.each {|x| x.gsub!(/ \(.+\)/, "")}
-        return @@dc_list
+        self.lister(:dc)
     end
     
+    def self.m_lister
+        self.lister(:marvel)
+    end
+
     @@m_list = Super.m_lister - ["U.S. Agent", "A-Bomb", "Patriot", "Radioactive Man", "Payback", "Hercules", "Gladiator", "Death", "Assassin", "X-23", "Nuke", "Dracula"]
     @@dc_list = Super.dc_lister - ["Oracle", "Scarecrow", "Shark King"]
 
