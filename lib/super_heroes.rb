@@ -62,7 +62,7 @@ class Super
     
     def gen_info
         s_param = @name.gsub(" ", "_")
-        doc = Nokogiri::HTML(open("#{@@path}/#{s_param}")).css("#mw-content-text p")
+        doc = Nokogiri::HTML(open("#{PATH}/#{s_param}")).css("#mw-content-text p")
         @gen_info = doc.text.delete("\n")
     end
 end
