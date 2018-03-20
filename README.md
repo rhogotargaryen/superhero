@@ -20,7 +20,7 @@ Or install it yourself as:
 
 ## Usage
 
-Please run the super_search file to begin the program.
+Please run the ./bin/super_search in console to begin the program.
 
 ## Development
 
